@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent {
+  @Input() label: string = '';
+  @Input() control: FormControl = new FormControl();
 
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  showErrors() {
+    const { dirty, touched, errors } = this.control;
+    return dirty && touched && errors;
+  }
 }
