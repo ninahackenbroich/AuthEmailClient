@@ -6,9 +6,9 @@
       class="input"
       [formControl]="control"
       [ngClass]="{ 'is-danger': showErrors() }"
+      [type]="inputType"
     />
   </div>
-  {{ control.errors | json }}
   <ng-container *ngIf="showErrors()">
     <div class="help is-danger" *ngIf="control.errors?.['required']">
       Value is required.

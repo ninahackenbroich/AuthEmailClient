@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 export class InputComponent {
   @Input() label: string = '';
   @Input() control: FormControl = new FormControl();
+  @Input() inputType: string = 'text';
 
   constructor() { }
 

@@ -2,8 +2,11 @@
   <h1>Sign Up</h1>
   <form [formGroup]="authForm">
     <app-input label="Username" [control]="authForm.controls.username"></app-input>
-    <app-input label="Password" [control]="authForm.controls.password"></app-input>
-    <app-input label="Confirm Password" [control]="authForm.controls.passwordConfirmation"></app-input>
+    <app-input label="Password" [control]="authForm.controls.password" inputType="password"></app-input>
+    <app-input label="Confirm Password" [control]="authForm.controls.passwordConfirmation" inputType="password"></app-input>
+    <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['passwordsDontMatch']">
+      Passwords do not match.
+    </div>
     <button type="submit" class="btn btn-primary mt-5">Submit</button>
   </form>
 </div>
