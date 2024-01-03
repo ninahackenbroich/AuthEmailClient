@@ -43,10 +43,8 @@ export class SigninComponent {
     };
     this.authService.signin(signinCredentials).subscribe({
       next: (response) => {
-        // this.router.navigateByUrl('/inbox');
+        this.router.navigateByUrl('/inbox');
         // Navigate to some other route
-
-        console.log(response);
       },
       error: (err) => {
         console.log(err.error);
