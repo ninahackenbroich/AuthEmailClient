@@ -7,6 +7,13 @@
     <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['passwordsDontMatch']">
       Passwords do not match.
     </div>
+
+    <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['noConnection']">
+      No connection. Can't sign up.
+    </div>
+    <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['unknownError']">
+      Failed to sign up. Try again later.
+    </div>
     <button type="submit" class="btn btn-primary mt-5">Submit</button>
   </form>
 </div>
