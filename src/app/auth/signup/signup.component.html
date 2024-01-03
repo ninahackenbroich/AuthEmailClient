@@ -1,6 +1,6 @@
 <div class="container py-5">
   <h1>Sign Up</h1>
-  <form [formGroup]="authForm">
+  <form (ngSubmit)="onSubmit()" [formGroup]="authForm">
     <app-input label="Username" [control]="authForm.controls.username"></app-input>
     <app-input label="Password" [control]="authForm.controls.password" inputType="password"></app-input>
     <app-input label="Confirm Password" [control]="authForm.controls.passwordConfirmation" inputType="password"></app-input>
