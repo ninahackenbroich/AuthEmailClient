@@ -12,7 +12,17 @@ interface SignupCredentials {
   passwordConfirmation: string;
 }
 
+interface SigninCredentials {
+  username: string;
+  password: string;
+}
+
 interface SignupResponse {
+  username: string;
+}
+
+interface SignedinResponse {
+  authenticated: boolean;
   username: string;
 }
 @Injectable({
@@ -44,13 +54,32 @@ export class AuthService {
     )
   }
 
+  signin(credentials: SigninCredentials) {
+    const url = `${this.rootUrl}signin`
+
+    return this.http.post<SignupResponse>(url, credentials).pipe(
+      tap(() => {
+        this.signedin$.next(true);
+      })
+    )
+  }
+
   checkAuth() {
     const url = `${this.rootUrl}signedin`
 
-    return this.http.get(url).pipe(
-      tap((response) => {
-        console.log(response);
-        this.signedin$.next(true);
+    return this.http.get<SignedinResponse>(url).pipe(
+      tap(({ authenticated }) => {
+        this.signedin$.next(authenticated);
+      })
+    )
+  }
+
+  signout() {
+    const url = `${this.rootUrl}signout`
+
+    return this.http.post(url, {}).pipe(
+      tap(() => {
+        this.signedin$.next(false);
       })
     )
   }

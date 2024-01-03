@@ -1,1 +1,18 @@
-<p>signin works!</p>
+<div class="container py-5">
+  <h3>Sign In</h3>
+  <form (ngSubmit)="onSubmit()" [formGroup]="authForm" class="">
+    <app-input label="Username" [control]="authForm.controls.username"></app-input>
+    <app-input label="Password" [control]="authForm.controls.password" inputType="password"></app-input>
+    <button type="submit" class="ui button primary mt-3">Submit</button>
+
+    <div class="ui left pointing red basic label" *ngIf="authForm.controls.password.touched && authForm.errors?.['noConnection']">
+      No connection. Can't sign up.
+    </div>
+    <div class="ui left pointing red basic label" *ngIf="authForm.controls.password.touched && authForm.errors?.['credentials']">
+      Invalid username or password.
+    </div>
+    <div class="ui left pointing red basic label" *ngIf="authForm.controls.password.touched && authForm.errors?.['unknownError']">
+      Failed to sign in. Try again later.
+    </div>
+  </form>
+</div>
