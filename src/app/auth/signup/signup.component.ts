@@ -47,7 +47,7 @@ export class SignupComponent {
       password: password || '',
       passwordConfirmation: passwordConfirmation || ''
     };
-    this.authService.onSignup(signupCredentials).subscribe({
+    this.authService.signup(signupCredentials).subscribe({
       next: (response) => {
         console.log(response);
         // Navigate to some other route

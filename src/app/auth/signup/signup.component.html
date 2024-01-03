@@ -1,19 +1,18 @@
 <div class="container py-5">
-  <h1>Sign Up</h1>
-  <form (ngSubmit)="onSubmit()" [formGroup]="authForm">
+  <h3>Sign Up</h3>
+  <form (ngSubmit)="onSubmit()" [formGroup]="authForm" class="">
     <app-input label="Username" [control]="authForm.controls.username"></app-input>
     <app-input label="Password" [control]="authForm.controls.password" inputType="password"></app-input>
     <app-input label="Confirm Password" [control]="authForm.controls.passwordConfirmation" inputType="password"></app-input>
-    <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['passwordsDontMatch']">
+    <button type="submit" class="ui button primary mt-3">Submit</button>
+    <div class="ui left pointing red basic label" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['passwordsDontMatch']">
       Passwords do not match.
     </div>
-
-    <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['noConnection']">
+    <div class="ui left pointing red basic label" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['noConnection']">
       No connection. Can't sign up.
     </div>
-    <div class="help is-danger" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['unknownError']">
+    <div class="ui left pointing red basic label" *ngIf="authForm.controls.password.touched && authForm.controls.passwordConfirmation.touched && authForm.errors?.['unknownError']">
       Failed to sign up. Try again later.
     </div>
-    <button type="submit" class="btn btn-primary mt-5">Submit</button>
   </form>
 </div>

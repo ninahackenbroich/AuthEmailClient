@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, tap } from 'rxjs';
 
 interface UsernameAvailableResponse {
   available: boolean
@@ -19,6 +20,7 @@ interface SignupResponse {
 })
 export class AuthService {
   rootUrl = "https://api.angular-email.com/auth/"
+  signedin$ = new BehaviorSubject(false); // BehaviorSubject is a type of Subject, a subject is a type of observable. $ is a convention to indicate that this is an observable.
 
   constructor(private http: HttpClient) {
   }
@@ -32,9 +34,24 @@ export class AuthService {
     return this.http.post<UsernameAvailableResponse>(url, body, { headers })
   }
 
-  onSignup(credentials: SignupCredentials) {
+  signup(credentials: SignupCredentials) {
     const url = `${this.rootUrl}signup`
 
-    return this.http.post<SignupResponse>(url, credentials, { withCredentials: true });
+    return this.http.post<SignupResponse>(url, credentials, { withCredentials: true }).pipe(
+      tap(() => {
+        this.signedin$.next(true);
+      })
+    )
+  }
+
+  checkAuth() {
+    const url = `${this.rootUrl}signedin`
+
+    return this.http.get(url, { withCredentials: true }).pipe(
+      tap((response) => {
+        console.log(response);
+        this.signedin$.next(true);
+      })
+    )
   }
 }

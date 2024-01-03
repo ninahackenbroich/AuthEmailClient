@@ -1,40 +1,39 @@
 
-<div class="field">
-  <label class="label">{{ label }}</label>
-  <div class="control">
+<div class="field pt-3">
+  <div class="ui input" [ngClass]="{ 'error': showErrors() }">
     <input
-      class="input"
+      class=""
       [formControl]="control"
-      [ngClass]="{ 'is-danger': showErrors() }"
       [type]="inputType"
+      [placeholder]="label"
     />
   </div>
   <ng-container *ngIf="showErrors()">
-    <div class="help is-danger" *ngIf="control.errors?.['required']">
+    <div class="ui left pointing red basic label" *ngIf="control.errors?.['required']">
       Value is required.
     </div>
-    <div class="help is-danger" *ngIf="control.errors?.['minlength']">
+    <div class="ui left pointing red basic label" *ngIf="control.errors?.['minlength']">
       Value you entered is
       {{ control.errors?.['minlength']?.actualLength }}
       characters long, but it must be at least
       {{ control.errors?.['minlength']?.requiredLength }}
       characters
     </div>
-    <div class="help is-danger" *ngIf="control.errors?.['maxlength']">
+    <div class="ui left pointing red basic label" *ngIf="control.errors?.['maxlength']">
       Value you entered is
       {{ control.errors?.['maxlength'].actualLength }}
       characters long, but it cannot be longer than
       {{ control.errors?.['maxlength'].requiredLength }}
       characters
     </div>
-    <div class="help is-danger" *ngIf="control.errors?.['pattern']">
+    <div class="ui left pointing red basic label" *ngIf="control.errors?.['pattern']">
       Invalid format.
     </div>
 
-    <div class="help is-danger" *ngIf="control.errors?.['nonUniqueUsername']">
+    <div class="ui left pointing red basic label" *ngIf="control.errors?.['nonUniqueUsername']">
       Username must be unique.
     </div>
-    <div class="help is-danger" *ngIf="control.errors?.['noConnection']">
+    <div class="ui left pointing red basic label" *ngIf="control.errors?.['noConnection']">
       Can't tell. Not connected to the internet.
     </div>
   </ng-container>
