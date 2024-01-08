@@ -1,0 +1,20 @@
+.item a {
+  color: #000;
+  text-decoration: none;
+  padding: 10px;
+
+}
+
+a.active {
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+a.active::before {
+  margin-right: 10px;
+  content: '🪄';
+  font-size: 20px;
+}
