@@ -4,6 +4,12 @@ import { MatchPassword } from "../validators/match-password";
 import { UniqueUsername } from "../validators/unique-username";
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
+
+interface SignupCredentials {
+  username: string;
+  password: string;
+  passwordConfirmation: string;
+}
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -36,20 +42,15 @@ export class SignupComponent {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   onSubmit() {
     if (this.authForm.invalid) {
       return;
     }
-    const { username, password, passwordConfirmation } = this.authForm.value;
-    const signupCredentials = {
-      username: username || '',
-      password: password || '',
-      passwordConfirmation: passwordConfirmation || ''
-    };
-    this.authService.signup(signupCredentials).subscribe({
+
+    this.authService.signup(this.authForm.value as SignupCredentials).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/inbox');
         // Navigate to some other route

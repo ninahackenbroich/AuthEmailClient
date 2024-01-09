@@ -4,7 +4,11 @@ import { InboxModule } from './inbox/inbox.module';
 import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'inbox', canLoad: [authGuard], loadChildren: () => InboxModule },
+  {
+    path: 'inbox',
+    canLoad: [authGuard],
+    loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule)
+  }
 ];
 
 @NgModule({

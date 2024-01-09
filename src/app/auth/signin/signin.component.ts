@@ -42,7 +42,7 @@ export class SigninComponent {
       password: password || '',
     };
     this.authService.signin(signinCredentials).subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigateByUrl('/inbox');
         // Navigate to some other route
       },
