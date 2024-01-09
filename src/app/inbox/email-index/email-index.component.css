@@ -18,3 +18,14 @@ a.active::before {
   content: '🪄';
   font-size: 20px;
 }
+
+.content {
+  width: 90%;
+}
+
+.trim {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
