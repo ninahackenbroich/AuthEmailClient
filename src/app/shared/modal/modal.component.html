@@ -1,5 +1,5 @@
-<div class="ui dimmer visible active" (click)="onDismissClick()">
-  <div (click)="$event.stopPropagation()" class="ui modal visible active">
+<div class="ui dimmer visible active d-flex justify-content-center" (click)="onDismissClick()">
+  <div (click)="$event.stopPropagation()" class="ui modal mini visible active">
     <i class="close icon" (click)="onDismissClick()"></i>
     <div class="header">
       <ng-content select="[modalTitle]"></ng-content>

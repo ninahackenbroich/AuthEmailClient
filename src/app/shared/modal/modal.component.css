@@ -9,3 +9,10 @@
 .actions:empty+.actions-default {
   display: block;
 }
+
+.ui.modal {
+  width: 95%;
+  margin: 0;
+  height: fit-content;
+  /* Remove any specific positioning styles like top, left, or transform if they exist */
+}

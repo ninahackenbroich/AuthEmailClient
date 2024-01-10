@@ -1,1 +1,10 @@
-<p>email-create works!</p>
+<button (click)="showModal = true" class="ui button inverted primary fluid">Compose</button>
+
+<app-modal (dismiss)="showModal = false" *ngIf="showModal">
+  <div class="header" modalTitle>
+    Compose
+  </div>
+  <div class="content">
+    <app-email-form [email]="email"></app-email-form>
+  </div>
+</app-modal>

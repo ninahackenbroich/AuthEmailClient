@@ -1,39 +1,48 @@
 
-<div class="field pt-3">
+<div class="field">
+  <label>{{ label }}</label>
   <div class="ui input" [ngClass]="{ 'error': showErrors() }">
-    <input
+
+    <input *ngIf="controlType === 'input'"
       class=""
       [formControl]="control"
       [type]="inputType"
-      [placeholder]="label"
     />
+
+    <textarea *ngIf="controlType === 'textarea'"
+    class=""
+    [formControl]="control"
+    ></textarea>
   </div>
   <ng-container *ngIf="showErrors()">
-    <div class="ui left pointing red basic label" *ngIf="control.errors?.['required']">
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['required']">
       Value is required.
     </div>
-    <div class="ui left pointing red basic label" *ngIf="control.errors?.['minlength']">
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['email']">
+      Value must be a valid email address.
+    </div>
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['minlength']">
       Value you entered is
       {{ control.errors?.['minlength']?.actualLength }}
       characters long, but it must be at least
       {{ control.errors?.['minlength']?.requiredLength }}
       characters
     </div>
-    <div class="ui left pointing red basic label" *ngIf="control.errors?.['maxlength']">
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['maxlength']">
       Value you entered is
       {{ control.errors?.['maxlength'].actualLength }}
       characters long, but it cannot be longer than
       {{ control.errors?.['maxlength'].requiredLength }}
       characters
     </div>
-    <div class="ui left pointing red basic label" *ngIf="control.errors?.['pattern']">
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['pattern']">
       Invalid format.
     </div>
 
-    <div class="ui left pointing red basic label" *ngIf="control.errors?.['nonUniqueUsername']">
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['nonUniqueUsername']">
       Username must be unique.
     </div>
-    <div class="ui left pointing red basic label" *ngIf="control.errors?.['noConnection']">
+    <div class="ui up pointing red basic label" *ngIf="control.errors?.['noConnection']">
       Can't tell. Not connected to the internet.
     </div>
   </ng-container>
