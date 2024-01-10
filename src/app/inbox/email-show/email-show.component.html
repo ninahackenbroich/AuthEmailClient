@@ -1,5 +1,5 @@
-<div class="header">
-  <div>
+<div class="header ui grid justify-content-center">
+  <div class="twelve wide column">
     <h3>{{ email.subject }}</h3>
     <div>
       From: <i>{{ email.from }}</i>
@@ -7,6 +7,9 @@
     <div>
       To: <i>{{ email.to }}</i>
     </div>
+  </div>
+  <div class="four wide column">
+    <app-email-reply [email]="email"></app-email-reply>
   </div>
 </div>
 <div class="ui divider">
