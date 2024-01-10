@@ -5,6 +5,6 @@
     Compose
   </div>
   <div class="content">
-    <app-email-form [email]="email"></app-email-form>
+    <app-email-form (emailSubmit)="onSubmit($event)" [email]="email"></app-email-form>
   </div>
 </app-modal>

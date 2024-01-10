@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Email } from '../email';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class EmailFormComponent {
   @Input() email!: Email;
+  @Output() emailSubmit = new EventEmitter();
 
   emailForm = new FormGroup({
     to: new FormControl('',
@@ -36,5 +37,14 @@ export class EmailFormComponent {
     this.emailForm.patchValue({ subject, from, to, text });
   }
 
+  onSubmit() {
+    if (this.emailForm.invalid) {
+      return;
+    }
 
+    /* console.log(this.emailForm.getRawValue()); // gets all values, even if disabled */
+    /* xonscle.log(this.emailForm.value); // gets only enabled values
+      */
+    this.emailSubmit.emit(this.emailForm.value);
+  }
 }

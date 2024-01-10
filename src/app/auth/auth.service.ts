@@ -31,8 +31,16 @@ interface SignedinResponse {
 export class AuthService {
   rootUrl = "https://api.angular-email.com/auth/"
   signedin$ = new BehaviorSubject(true); // BehaviorSubject is a type of Subject, a subject is a type of observable. $ is a convention to indicate that this is an observable.
+  username = new BehaviorSubject<string>('');
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    this.checkAuth().subscribe();
+  }
+
+  ngOnInit() {
+    this.checkAuth().subscribe();
+  }
 
   usernameAvailable(username: string) {
     const url = `${this.rootUrl}username`
@@ -47,8 +55,9 @@ export class AuthService {
     const url = `${this.rootUrl}signup`
 
     return this.http.post<SignupResponse>(url, credentials).pipe(
-      tap(() => {
+      tap((response) => {
         this.signedin$.next(true);
+        this.username.next(response.username);
       })
     )
   }
@@ -57,8 +66,9 @@ export class AuthService {
     const url = `${this.rootUrl}signin`
 
     return this.http.post<SignupResponse>(url, credentials).pipe(
-      tap(() => {
+      tap((response) => {
         this.signedin$.next(true);
+        this.username.next(response.username);
       })
     )
   }
@@ -67,9 +77,9 @@ export class AuthService {
     const url = `${this.rootUrl}signedin`
 
     return this.http.get<SignedinResponse>(url).pipe(
-      tap(({ authenticated }) => {
-        this.signedin$.next(authenticated);
-        console.log(authenticated);
+      tap((response) => {
+        this.signedin$.next(response.authenticated);
+        this.username.next(response.username);
 
       })
     )
